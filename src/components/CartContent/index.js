@@ -1,6 +1,6 @@
 import React from "react";
 import { uid } from "react-uid";
-import { Divider, Paper, Grid, IconButton } from '@material-ui/core/';
+import { Tooltip, Divider, Paper, Grid, IconButton } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { withStyles } from "@material-ui/core/styles";
@@ -50,21 +50,24 @@ class CartContent extends React.Component {
                     <div key={uid(product)} >
                         <Grid container alignItems="center">
                             {[product.name, product.quantity, (product.price*product.quantity).toFixed(2)].map((item) => (
-                                <Grid item xs={3}>
+                                <Grid key={uid(item)} item xs={3}>
                                     <Paper elevation={0} className={classes.paper}>{item}</Paper>
                                 </Grid>
                             ))}
                             <Grid item xs={3}>
                                 <Grid justify="space-evenly" container>
                                     <Grid item>
-                                        {/* <IconButton onClick={}> */}
-                                        <IconButton onClick={reduceQuantity.bind(this, component, product)}>
-                                                <RemoveIcon/>
-                                        </IconButton>
+                                        <Tooltip title="Reduce 1 unit">
+                                            <IconButton onClick={reduceQuantity.bind(this, component, product)}>
+                                                    <RemoveIcon/>
+                                            </IconButton>
+                                        </Tooltip>
                                     </Grid>
-                                        <IconButton onClick={addQuantity.bind(this, component, product)}>
-                                            <AddIcon/>
-                                        </IconButton>
+                                        <Tooltip title="Add one more">
+                                            <IconButton onClick={addQuantity.bind(this, component, product)}>
+                                                <AddIcon/>
+                                            </IconButton>
+                                        </Tooltip>
                                     </Grid>
                             </Grid>
                         </Grid>

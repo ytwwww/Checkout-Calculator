@@ -16,11 +16,13 @@ export const addQuantity =  (app, product) => {
     newCart[i].quantity ++;
   }
 
-  const newNumItems = app.state.stats.numItems + 1
-  const newTotal = (app.state.stats.total + product.price);
+  let newStat = app.state.stats;
+  app.state.stats.numItems ++;
+  app.state.stats.total += product.price;
+
   app.setState({
     cartItems: newCart,
-    stats: {numItems: newNumItems, total: newTotal}
+    stats: newStat
   });
 };
 
@@ -40,11 +42,33 @@ export const reduceQuantity = (app, product) => {
   }
 
   // update stats
-  const newNumItems = app.state.stats.numItems - 1
-  const newTotal = app.state.stats.total - product.price
+  let newStat = app.state.stats;
+  app.state.stats.numItems --;
+  app.state.stats.total -= product.price;
 
   app.setState({
     cartItems: newCart,
-    stats: {numItems: newNumItems, total: newTotal}
+    stats: newStat
   });
 };
+
+export const toggleFav = (app, product) => {
+  // a function to compare products
+  const isTarget = p => p.name === product.name;
+
+  let items = app.state.products;
+  const i = items.findIndex(isTarget);
+  items[i].fav = ! items[i].fav;
+
+  let newStat = app.state.stats;
+  if (items[i].fav) {
+    newStat.favItems ++;
+  } else {
+    newStat.favItems --;
+  }
+
+  app.setState({
+    products: items,
+    stats: newStat,
+  });
+}

@@ -52,7 +52,7 @@ class Inventory extends React.Component {
                             <Grid item xs={3}>
                                 <Paper elevation={0}  className={classes.paper}>
                                     {"CDN$ "}
-                                    <strong>{product.price}</strong>
+                                    <strong>{product.price.toFixed(2)}</strong>
                                 </Paper>
                             </Grid>
                             <Grid item xs={3}>

@@ -1,18 +1,23 @@
 export const addQuantity =  (app, product) => {
-  const targets = app.state.products.filter(p => p.name === product.name);
-  if (targets.length < 1) {
-    return;
-  }
-  const foundProducts = app.state.cartItems.filter(p => p.name === product.name);
-  let newCart = app.state.cartItems.filter(p => p.name !== product.name);
-  if (foundProducts.length > 0) {
-    foundProducts[0].quantity ++;
-    newCart.push(foundProducts[0]);
-  } else {
+  let newCart = app.state.cartItems;
+
+  // a function to compare products
+  const isTarget = p => p.name === product.name;
+
+  // find index of the product in cart
+  const i = newCart.findIndex(isTarget);
+
+  // if the product is not found in cart, add to cart
+  if (i < 0) {
     newCart.push({name: product.name, quantity: 1, price: product.price});
+
+  // if the product is found in cart, update quantity
+  } else {
+    newCart[i].quantity ++;
   }
+
   const newNumItems = app.state.stats.numItems + 1
-  const newTotal = app.state.stats.total + product.price
+  const newTotal = (app.state.stats.total + product.price);
   app.setState({
     cartItems: newCart,
     stats: {numItems: newNumItems, total: newTotal}
@@ -20,18 +25,24 @@ export const addQuantity =  (app, product) => {
 };
 
 export const reduceQuantity = (app, product) => {
-  const cart = app.state.cartItems
-  const target = cart.filter(p => p.name === product.name);
-  let newCart = cart.filter(p => p.name !== product.name);
-  if (target.length > 0) {
-    target[0].quantity --;
-    // if product has at least 1 unit
-    if (target[0].quantity >= 1) {
-      newCart.push(target[0]);
-    }
+  let newCart = app.state.cartItems;
+
+  // a function to compare products
+  const isTarget = p => p.name === product.name;
+
+  // find index of the product in cart
+  const i = newCart.findIndex(isTarget);
+  newCart[i].quantity --;
+
+  // remove product in cart if quantity is 0
+  if (newCart[i].quantity < 1) {
+    newCart = newCart.filter(p => p.name !== product.name);
   }
+
+  // update stats
   const newNumItems = app.state.stats.numItems - 1
   const newTotal = app.state.stats.total - product.price
+
   app.setState({
     cartItems: newCart,
     stats: {numItems: newNumItems, total: newTotal}

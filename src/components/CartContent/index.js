@@ -37,10 +37,19 @@ class CartContent extends React.Component {
                     </Grid>
                 </Grid>
                 <Divider />
-                {this.props.cart.map((product) => (
+                {this.props.stats.numItems === 0 ?
+
+                <Grid container alignItems="center" justify="center">
+                    <br /><br /><br />
+                    <Grid item xs={8}>
+                        <Paper elevation={0} className={classes.paper}>Your cart is empty.</Paper>
+                    </Grid>
+                </Grid> 
+                :
+                this.props.cart.map((product) => (
                     <div key={uid(product)} >
                         <Grid container alignItems="center">
-                            {[product.name, product.quantity, product.price * product.quantity].map((item) => (
+                            {[product.name, product.quantity, (product.price*product.quantity).toFixed(2)].map((item) => (
                                 <Grid item xs={3}>
                                     <Paper elevation={0} className={classes.paper}>{item}</Paper>
                                 </Grid>
@@ -84,7 +93,7 @@ class CartContent extends React.Component {
                         </Grid>
                         <Grid item xs={3}>
                             <Paper elevation={1} className={classes.paper}>
-                                <strong>{this.props.stats.total}</strong>
+                                <strong>{Math.abs(this.props.stats.total.toFixed(2))}</strong>
                             </Paper>
                         </Grid>
                 </Grid>

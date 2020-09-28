@@ -9,16 +9,16 @@ import { addQuantity, reduceQuantity } from "../src/actions/cart";
 class App extends React.Component {
   state = {
     products: [
-        {name: "Apple", price: 1},
-        {name: "Dragonfruit", price: 5},
-        {name: "Juice", price: 2},
-        {name: "Banana", price: 0.5},
-        {name: "Watermelon", price: 7.5},
-        {name: "Kiwi", price: 1.33},
-        {name: "Spinach", price: 2.5},
-        {name: "Cabbage", price: 1.5},
-        {name: "Pork", price: 8},
-        {name: "Beef", price: 10}],
+        {name: "Apple", price: 1.70},
+        {name: "Dragonfruit", price: 5.00},
+        {name: "Juice", price: 2.00},
+        {name: "Banana", price: 0.51},
+        {name: "Watermelon", price: 7.56},
+        {name: "Kiwi", price: 1.50},
+        {name: "Spinach", price: 2.59},
+        {name: "Cabbage", price: 1.58},
+        {name: "Pork", price: 8.22},
+        {name: "Beef", price: 10.11}],
     cartItems: [],
     stats: {numItems: 0, total: 0}
   }

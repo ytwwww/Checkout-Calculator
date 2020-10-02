@@ -35,13 +35,12 @@ class App extends React.Component {
                   favNum={this.state.stats.favItems}
                 />
                 <Inventory
+                  isFav={false}
                   component={this}
                   products={this.state.products} 
                   cart={this.state.cartItems}
                   addFunc={() => addQuantity(this)}
-                  isFav={false}
                   favFunc={() => toggleFav(this)}
-                  favNum={this.state.stats.favItems}
                 />
               </div>
             )}/>
@@ -69,13 +68,12 @@ class App extends React.Component {
                   favNum={this.state.stats.favItems}
                 />
                 <Inventory
+                  isFav={true}
                   component={this}
                   products={this.state.products} 
                   cart={this.state.cartItems}
                   addFunc={() => addQuantity(this)}
-                  isFav={true}
                   favFunc={() => toggleFav(this)}
-                  favNum={this.state.stats.favItems}
                 />
               </div>
             )}/>

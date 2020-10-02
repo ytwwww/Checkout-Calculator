@@ -16,7 +16,7 @@ class Bar extends React.Component {
 
                             <Grid item>
                                 <Link to={"/favorite"}>
-                                    <Tooltip title="favorites">
+                                    <Tooltip title="Favorites">
                                         <IconButton color="inherit">
                                             <Badge badgeContent={this.props.favNum} color="secondary">
                                                 <FavoriteIcon/>
@@ -47,6 +47,7 @@ class Bar extends React.Component {
                                     </Tooltip>
                                 </Link>
                             </Grid>
+
                         </Grid>
                     </Toolbar>
                 </AppBar>

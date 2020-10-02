@@ -47,6 +47,7 @@ class Inventory extends React.Component {
                         </Grid>
                 <Divider />
                 {productList.length === 0 ?
+                    // empty list
                     <Grid container alignItems="center" justify="center">
                         <br /><br /><br />
                         <Grid item xs={8}>
@@ -54,9 +55,12 @@ class Inventory extends React.Component {
                         </Grid>
                     </Grid>
 
+                    // non-empty list
                     : productList.map((product) => (
                         <div key={uid(product)}>
                             <Grid container justify="center" alignItems="center">
+
+                                {/* favorite button */}
                                 <Grid item xs={2}>
                                     <Paper elevation={0}  className={classes.paper}>
                                         <IconButton
@@ -68,17 +72,23 @@ class Inventory extends React.Component {
                                         </IconButton>
                                     </Paper>
                                 </Grid>
+
+                                {/* product name */}
                                 <Grid item xs={3}>
                                     <Paper elevation={0}  className={classes.paper}>
                                         {product.name}
                                     </Paper>
                                 </Grid>
+
+                                {/* price */}
                                 <Grid item xs={3}>
                                     <Paper elevation={0}  className={classes.paper}>
                                         {"CDN$ "}
                                         <strong>{product.price.toFixed(2)}</strong>
                                     </Paper>
                                 </Grid>
+
+                                {/* button to add product to cart */}
                                 <Grid item xs={4}>
                                     <Paper elevation={0}  className={classes.paper}>
                                         <Button

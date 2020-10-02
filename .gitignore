@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+client/build
+client/package-lock.json
+client/node_modules
+
+mongo-data

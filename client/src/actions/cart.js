@@ -24,6 +24,10 @@ export const addQuantity =  (app, product) => {
     cartItems: newCart,
     stats: newStat
   });
+
+  // if product in database, update quantity
+  // if product is not in database, add it
+  
 };
 
 export const reduceQuantity = (app, product) => {
@@ -50,6 +54,8 @@ export const reduceQuantity = (app, product) => {
     cartItems: newCart,
     stats: newStat
   });
+
+  // reduce quantity of product in database
 };
 
 export const toggleFav = (app, product) => {

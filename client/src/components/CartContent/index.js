@@ -23,6 +23,7 @@ class CartContent extends React.Component {
 
         return (
             <div>
+                {/* header of table */}
                 <Grid container>
                     {["Name", "Quantity", "Subtotal"].map((item) => (
                         <Grid key={uid(item)} item xs={3}>
@@ -38,14 +39,14 @@ class CartContent extends React.Component {
                 </Grid>
                 <Divider />
                 {this.props.stats.numItems === 0 ?
-
+                // empty cart
                 <Grid container alignItems="center" justify="center">
                     <br /><br /><br />
                     <Grid item xs={8}>
                         <Paper elevation={0} className={classes.paper}>Your cart is empty.</Paper>
                     </Grid>
                 </Grid> 
-                :
+                : // non-empty cart
                 this.props.cart.map((product) => (
                     <div key={uid(product)} >
                         <Grid container alignItems="center">
@@ -54,10 +55,12 @@ class CartContent extends React.Component {
                                     <Paper elevation={0} className={classes.paper}>{item}</Paper>
                                 </Grid>
                             ))}
+
+                            {/* add and minus buttos for each item */}
                             <Grid item xs={3}>
                                 <Grid justify="space-evenly" container>
                                     <Grid item>
-                                        <Tooltip title="Reduce 1 unit">
+                                        <Tooltip title="Reduce one unit">
                                             <IconButton onClick={reduceQuantity.bind(this, component, product)}>
                                                     <RemoveIcon/>
                                             </IconButton>

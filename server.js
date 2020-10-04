@@ -46,21 +46,21 @@ app.post("/products", (req, res) => {
 app.post("/cart", (req, res) => {
     console.log("post cart");
     // Cart.findOneAndUpdate({name: req.body.name}, {quantity: req.body.quantity}, {upsert: true})
-    Cart.findOneAndUpdate({name: req.body.name}, {new: true, quantity: req.body.quantity})
-    .then((result) => {
-    }).catch((err) => {
-        const product = new Cart({
-            name: req.body.name,
-            quantity: req.body.quantity,
-            price: req.body.price
-        });
-        product.save().then((result) => {
-            res.send(result);
-        }).catch((err) => {
-            res.status(400).send("Bad Request");
-        });
-        res.status(400).send("Bad Request");
-    });
+    // Cart.findOneAndUpdate({name: req.body.name}, {new: true, quantity: req.body.quantity})
+    // .then((result) => {
+    // }).catch((err) => {
+    //     const product = new Cart({
+    //         name: req.body.name,
+    //         quantity: req.body.quantity,
+    //         price: req.body.price
+    //     });
+    //     product.save().then((result) => {
+    //         res.send(result);
+    //     }).catch((err) => {
+    //         res.status(400).send("Bad Request");
+    //     });
+    //     res.status(400).send("Bad Request");
+    // });
 
         // product => {
             // q = product.quantity;
@@ -77,16 +77,16 @@ app.post("/cart", (req, res) => {
             //     res.status(400).send("Bad Request");
             // });
         // });
-	// const product = new Cart({
-	// 	name: req.body.name,
-	// 	quantity: req.body.quantity,
-	// 	price: req.body.price
-    // });
-	// product.save().then((result) => {
-	// 	res.send(result);
-	// }).catch((err) => {
-	// 	res.status(400).send("Bad Request");
-	// });
+	const product = new Cart({
+		name: req.body.name,
+		quantity: req.body.quantity,
+		price: req.body.price
+    });
+	product.save().then((result) => {
+		res.send(result);
+	}).catch((err) => {
+		res.status(400).send("Bad Request");
+	});
 });
 
 // a GET route to get all products

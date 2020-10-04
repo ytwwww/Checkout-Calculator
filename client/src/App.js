@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Bar from "./components/Bar"
-import CartContent from "./components/CartContent"
+import Cart from "./components/Cart"
 import Inventory from './components/Inventory';
 import { addQuantity, reduceQuantity, toggleFav } from "../src/actions/cart";
 
@@ -13,7 +13,7 @@ class App extends React.Component {
         {name: "Dragonfruit", price: 5.00, fav: false},
         {name: "Juice", price: 2.00, fav: false},
         {name: "Banana", price: 0.51, fav: false},
-        {name: "Watermelon", price: 7.56, fav: false},
+        {name: "Melon", price: 7.56, fav: false},
         {name: "Kiwi", price: 1.50, fav: false},
         {name: "Spinach", price: 2.59, fav: false},
         {name: "Cabbage", price: 1.58, fav: false},
@@ -21,6 +21,9 @@ class App extends React.Component {
         {name: "Beef", price: 10.11, fav: false}],
     cartItems: [],
     stats: {numItems: 0, total: 0, favItems: 0}
+  }
+  componentDidMount() {
+
   }
 
   render() {
@@ -51,7 +54,7 @@ class App extends React.Component {
                   num={this.state.stats.numItems}
                   favNum={this.state.stats.favItems}
                 />
-                <CartContent 
+                <Cart
                   component={this}
                   cart={this.state.cartItems}
                   stats={this.state.stats}

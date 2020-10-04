@@ -4,7 +4,8 @@ import { Tooltip, Divider, Paper, Grid, IconButton } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { withStyles } from "@material-ui/core/styles";
-import { addQuantity, reduceQuantity } from "../../actions/cart";
+import { addQuantity, reduceQuantity } from "../../actions/cart"; 
+import CartHeader from "../CartHeader";
 
 const styles = theme => ({
     root: {
@@ -17,35 +18,21 @@ const styles = theme => ({
     },
 });
 
-class CartContent extends React.Component {
+class Cart extends React.Component {
     render() {
         const { component, classes } = this.props;
 
         return (
             <div>
-                {/* header of table */}
-                <Grid container>
-                    {["Name", "Quantity", "Subtotal"].map((item) => (
-                        <Grid key={uid(item)} item xs={3}>
-                            <Paper elevation={0} className={classes.paper}>
-                                <strong>{item}</strong>
-                            </Paper>
-                        </Grid>))}
-                    <Grid item xs={3}>
-                        <Paper elevation={0} className={classes.paper}>
-                            <strong>Actions</strong>
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <Divider />
+                <CartHeader />
                 {this.props.stats.numItems === 0 ?
-                // empty cart
-                <Grid container alignItems="center" justify="center">
-                    <br /><br /><br />
-                    <Grid item xs={8}>
-                        <Paper elevation={0} className={classes.paper}>Your cart is empty.</Paper>
+                    // empty cart
+                    <Grid container alignItems="center" justify="center">
+                        <br /><br />
+                        <Grid item xs={8}>
+                            <Paper elevation={0} className={classes.paper}>Your cart is empty.</Paper>
+                        </Grid>
                     </Grid>
-                </Grid> 
                 : // non-empty cart
                 this.props.cart.map((product) => (
                     <div key={uid(product)} >
@@ -109,4 +96,4 @@ class CartContent extends React.Component {
     }
 }
 
-export default withStyles(styles)(CartContent);
+export default withStyles(styles)(Cart);

@@ -6,6 +6,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { addQuantity, toggleFav } from "../../actions/cart";
+import InventoryHeader from '../InventoryHeader';
 
 const styles = theme => ({
     root: {
@@ -31,21 +32,8 @@ class Inventory extends React.Component {
 
         return (
             <div>
-                <Grid container justify="center" alignItems="center">
-                            <Grid item xs={2}></Grid>
-                            <Grid item xs={3}>
-                                <Paper elevation={0}  className={classes.paper}>
-                                    <strong>Name</strong>
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <Paper elevation={0}  className={classes.paper}>
-                                    <strong>Price</strong>
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={4}></Grid>
-                        </Grid>
-                <Divider />
+                <InventoryHeader />
+
                 {productList.length === 0 ?
                     // empty list
                     <Grid container alignItems="center" justify="center">

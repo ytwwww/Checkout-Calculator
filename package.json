@@ -8,7 +8,7 @@
     "build-run": "cd client && npm run build && cd .. && node server.js",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "cd client && npm test"
+    "test": "cd client && npm install && npm test"
   },
   "repository": {
     "type": "git",

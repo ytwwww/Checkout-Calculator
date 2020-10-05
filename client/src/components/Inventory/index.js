@@ -26,9 +26,7 @@ const styles = theme => ({
 class Inventory extends React.Component {
     render() {
         const { component, classes } = this.props;
-        const productList = this.props.isFav ?
-            this.props.products.filter(p => p.fav)
-            : this.props.products;
+        const productList = this.props.products;
 
         return (
             <div>
@@ -37,7 +35,7 @@ class Inventory extends React.Component {
                 {productList.length === 0 ?
                     // empty list
                     <Grid container alignItems="center" justify="center">
-                        <br /><br /><br />
+                        <br /><br />
                         <Grid item xs={8}>
                             <Paper elevation={0} className={classes.paper}>Your list is empty.</Paper>
                         </Grid>

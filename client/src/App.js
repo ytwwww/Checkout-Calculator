@@ -8,22 +8,29 @@ import { addQuantity, reduceQuantity, toggleFav } from "../src/actions/cart";
 
 class App extends React.Component {
   state = {
-    products: [
-        {name: "Apple", price: 1.70, fav: false},
-        {name: "Dragonfruit", price: 5.00, fav: false},
-        {name: "Juice", price: 2.00, fav: false},
-        {name: "Banana", price: 0.51, fav: false},
-        {name: "Melon", price: 7.56, fav: false},
-        {name: "Kiwi", price: 1.50, fav: false},
-        {name: "Spinach", price: 2.59, fav: false},
-        {name: "Cabbage", price: 1.58, fav: false},
-        {name: "Pork", price: 8.22, fav: false},
-        {name: "Beef", price: 10.11, fav: false}],
+    products: [],
     cartItems: [],
     stats: {numItems: 0, total: 0, favItems: 0}
   }
-  componentDidMount() {
 
+  componentDidMount() {
+    fetch('/products')
+    .then((response) => response.json())
+    .then(allproducts => {
+      let sum = 0;
+      let nItems = 0;
+      const nFavs = allproducts.filter(p => p.fav).length;
+      const cartContent = allproducts.filter(p => p.cart);
+      cartContent.forEach(item => {
+        nItems += item.quantity;
+        sum += item.price * item.quantity;
+      });
+      this.setState({ 
+        products: allproducts,
+        cartItems: cartContent,
+        stats: {numItems: nItems, total: Math.abs(sum.toFixed(2)), favItems: nFavs}
+      });
+    });
   }
 
   render() {
@@ -38,7 +45,6 @@ class App extends React.Component {
                   favNum={this.state.stats.favItems}
                 />
                 <Inventory
-                  isFav={false}
                   component={this}
                   products={this.state.products} 
                   cart={this.state.cartItems}
@@ -71,9 +77,8 @@ class App extends React.Component {
                   favNum={this.state.stats.favItems}
                 />
                 <Inventory
-                  isFav={true}
                   component={this}
-                  products={this.state.products} 
+                  products={this.state.products.filter(p => p.fav)}
                   cart={this.state.cartItems}
                   addFunc={() => addQuantity(this)}
                   favFunc={() => toggleFav(this)}

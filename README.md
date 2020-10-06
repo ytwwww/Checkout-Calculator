@@ -2,7 +2,7 @@
 Deployed web app can be reached here https://csc301store.herokuapp.com/
 ## Features
 - Add products to shopping cart
-- set products as favorite
+- Set and un-set products as favorite by clicking the heart button
 - Adjust quantities of products in shopping cart
 - Automatically calculate subtotal, grand total, and numbers of items in the cart
 - Responsive to different screen sizes (phone, tablet, and desktop)

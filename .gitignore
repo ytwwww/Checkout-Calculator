@@ -26,4 +26,5 @@ client/build
 client/package-lock.json
 client/node_modules
 
+package-lock.json
 mongo-data

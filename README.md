@@ -27,3 +27,7 @@ In the root directory of this app, run the following command in your terminal:
 ```
 npm test
 ```
+### Notes about CI/CD
+All pushes to this repo on or After Oct. 5 fail on CI/CD due to limited free credits offered by CircleCI.
+Please see the last commit on Oct. 4 for a successful CI/CD run
+(Commit hash: 3eb47b45f6f84d5ad575e6a93e91f1002a4298e6).

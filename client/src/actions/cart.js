@@ -1,3 +1,4 @@
+// Helper to PATCH changes to database
 const patcher = (id, changes) => {
   const url = "/products/" + id;
   const request = new Request(url, {
@@ -21,11 +22,34 @@ const patcher = (id, changes) => {
   })
 }
 
+// format price to cents (2 decimal points)
+export const formatPrice = (price) => {
+  return Math.abs(parseFloat(price).toFixed(2));
+}
+
+// Given a product, calculte formatted subtotal
+export const calculateSubtotal = (product) => {
+  return formatPrice(product.price * product.quantity);
+
+}
+
+// Given a list of products, calculate total number of items and the total price
+export const calculateQuantityAndTotal = (products) => {
+  let ttl = 0;
+  let qty = 0;
+  products.forEach(item => {
+    qty += item.quantity;
+    ttl += calculateSubtotal(item);
+  });
+  return {total: formatPrice(ttl), quantity: qty};
+}
+
+// Function to reduce quantity of a product in cart by 1
 export const addQuantity =  (app, product) => {
   let newCart = app.state.cartItems;
 
   // a function to compare products
-  const isTarget = p => p.name === product.name;
+  const isTarget = p => p._id === product._id;
 
   // find index of the product in cart
   const i = newCart.findIndex(isTarget);
@@ -46,7 +70,7 @@ export const addQuantity =  (app, product) => {
 
   let newStat = app.state.stats;
   newStat.numItems ++;
-  newStat.total = Math.abs((app.state.stats.total + product.price).toFixed(2));
+  newStat.total = formatPrice(app.state.stats.total + product.price);
 
   app.setState({
     cartItems: newCart,
@@ -59,11 +83,12 @@ export const addQuantity =  (app, product) => {
   patcher(product._id, changes);
 };
 
+// Function to reduce quantity of a product in cart by 1
 export const reduceQuantity = (app, product) => {
   let newCart = app.state.cartItems;
 
   // a function to compare products
-  const isTarget = p => p.name === product.name;
+  const isTarget = p => p._id === product._id;
 
   // find index of the product in cart
   const i = newCart.findIndex(isTarget);
@@ -80,14 +105,12 @@ export const reduceQuantity = (app, product) => {
 
   let newStat = app.state.stats;
   newStat.numItems --;
-  newStat.total = Math.abs((app.state.stats.total - product.price).toFixed(2));
+  newStat.total = formatPrice(app.state.stats.total - product.price);
 
   app.setState({
     cartItems: newCart,
     stats: newStat
   });
-  console.log(newCart);
-// console.log(app.state.cartItems);
   const changes = [
     {op: "replace", path: "/cart", "value": incart},
     {op: "replace", path: "/quantity", "value": n}
@@ -95,10 +118,11 @@ export const reduceQuantity = (app, product) => {
   patcher(product._id, changes);
 };
 
+// Function to favorite or un-favorite a product
 export const toggleFav = (app, product) => {
   // a function to compare products
-  const isTarget = p => p.name === product.name;
-  
+  const isTarget = p => p._id === product._id;
+
   let items = app.state.products;
   const i = items.findIndex(isTarget);
   const newBool = ! items[i].fav
@@ -119,4 +143,3 @@ export const toggleFav = (app, product) => {
   const changes = [{op: "replace", path: "/fav", "value": newBool}];
   patcher(product._id, changes);
 }
-

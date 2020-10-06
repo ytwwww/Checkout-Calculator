@@ -63,6 +63,23 @@ app.get("/products/:id", (req, res) => {
     );
 });
 
+// a DELETE route to remove 1 product by its id
+app.delete("/products/:id", (req, res) => {
+    const id = req.params.id;
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send("Invalid ID");
+        return;
+    }
+    Product.findByIdAndDelete(id).then(
+        products => {
+            res.send(products);
+        },
+        error => {
+            res.status(500).send(error); // server error
+        }
+    );
+});
+
 // a GET route to get all favorite products
 app.get("/favs", (req, res) => {
     Product.find({ fav: true }).then(

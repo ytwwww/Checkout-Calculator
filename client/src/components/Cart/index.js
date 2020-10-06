@@ -4,7 +4,7 @@ import { Tooltip, Divider, Paper, Grid, IconButton } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { withStyles } from "@material-ui/core/styles";
-import { addQuantity, reduceQuantity } from "../../actions/cart"; 
+import { calculateSubtotal, addQuantity, reduceQuantity } from "../../actions/cart"; 
 import CartHeader from "../CartHeader";
 
 const styles = theme => ({
@@ -37,7 +37,7 @@ class Cart extends React.Component {
                 this.props.cart.map((product) => (
                     <div key={uid(product)} >
                         <Grid container alignItems="center">
-                            {[product.name, product.quantity, (product.price * product.quantity).toFixed(2)].map((item) => (
+                            {[product.name, product.quantity, calculateSubtotal(product)].map((item) => (
                                 <Grid key={uid(item)} item xs={3}>
                                     <Paper elevation={0} className={classes.paper}>{item}</Paper>
                                 </Grid>

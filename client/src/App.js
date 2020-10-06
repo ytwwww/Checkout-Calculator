@@ -4,7 +4,7 @@ import './App.css';
 import Bar from "./components/Bar"
 import Cart from "./components/Cart"
 import Inventory from './components/Inventory';
-import { addQuantity, reduceQuantity, toggleFav } from "../src/actions/cart";
+import { calculateQuantityAndTotal, addQuantity, reduceQuantity, toggleFav } from "../src/actions/cart";
 
 class App extends React.Component {
   state = {
@@ -17,18 +17,13 @@ class App extends React.Component {
     fetch('/products')
     .then((response) => response.json())
     .then(allproducts => {
-      let sum = 0;
-      let nItems = 0;
       const nFavs = allproducts.filter(p => p.fav).length;
       const cartContent = allproducts.filter(p => p.cart);
-      cartContent.forEach(item => {
-        nItems += item.quantity;
-        sum += item.price * item.quantity;
-      });
+      const qtyttl = calculateQuantityAndTotal(cartContent);
       this.setState({ 
         products: allproducts,
         cartItems: cartContent,
-        stats: {numItems: nItems, total: Math.abs(sum.toFixed(2)), favItems: nFavs}
+        stats: {numItems: qtyttl.quantity, total: qtyttl.total, favItems: nFavs}
       });
     });
   }

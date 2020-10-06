@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { addQuantity, toggleFav } from "../../actions/cart";
+import { formatPrice, addQuantity, toggleFav } from "../../actions/cart";
 import InventoryHeader from '../InventoryHeader';
 
 const styles = theme => ({
@@ -70,7 +70,7 @@ class Inventory extends React.Component {
                                 <Grid item xs={3}>
                                     <Paper elevation={0}  className={classes.paper}>
                                         {"CDN$ "}
-                                        <strong>{product.price.toFixed(2)}</strong>
+                                        <strong>{formatPrice(product.price)}</strong>
                                     </Paper>
                                 </Grid>
 

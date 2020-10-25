@@ -1,0 +1,27 @@
+Web app (18):
+Allows users to add food items to cart and then checkout (with both pre-loaded items and ability to add new items).
+Added favourite list.
+
+Suggestions: Can also include discount/coupon feature.
+             Can also include picture/description of each item.
+
+
+Web report (22.5): 
+Very simple comparisons for different web development choices. Need to include more content (e.g. front end vs. Back end; performance, maturity of the languages, domain covered by the technology, scalability, etc).
+Brief explanation for testing, CD/CI, and database as well.
+
+Web CI/CD (bonus): 7
+
+
+Mobile app (17.5):
+Similar to web app (implemented discount instead of favourite list; cannot dynamically add items)
+
+
+Mobile report (25.5):
+Good front-end comparisons.
+Good database/back-end comparisons.
+Brief explanation for testing and CD/CI.
+
+Mobile  CI/CD (bonus): 6
+
+Total: 96.5

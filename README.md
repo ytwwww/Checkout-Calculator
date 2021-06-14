@@ -1,6 +1,5 @@
 # CSC301 Assignment1 Pair39 Web App - Store
-Deployed web app can be reached here https://csc301store.herokuapp.com/  
-The report for both our web app and mobile app is available in this repo.
+Deployed web app can be reached here https://csc301store.herokuapp.com/
 ## Features
 - Add products to shopping cart
 - Set and un-set products as favorite by clicking the heart button
@@ -10,8 +9,8 @@ The report for both our web app and mobile app is available in this repo.
 ## How to start this app locally
 Use the following commands in your terminal:
 ```
-git clone https://github.com/csc301-fall-2020/assignment-1-39-ytwwww-chantalsorias-web
-cd ./assignment-1-39-ytwwww-chantalsorias-web
+git clone https://github.com/ytwwww/Checkout-Calculator
+cd ./Checkout-Calculator
 npm run setup
 npm run build-run
 ```
